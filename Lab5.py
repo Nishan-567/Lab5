@@ -22,9 +22,9 @@ try:
 	while True:
 		for (index, pwmLED) in enumerate(pwm):
 			phi = math.pi/11
-			phaseShift = i * phi
+			phaseShift = index * phi
 			t = time.time()
-			B = (math.sin(2*math.pi*dc_f*t - phi))**2
+			B = (math.sin(2*math.pi*dc_f*t - phaseShift))**2
 			dc = B * 100
 			pwmLED.ChangeDutyCycle(dc)
 
@@ -34,6 +34,7 @@ except KeyboardInterrupt:
 pwm.stop()
 GPIO.cleanup()
 	
+
 
 
 
