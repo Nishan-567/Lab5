@@ -7,6 +7,7 @@ GPIO.setmode(GPIO.BCM)
 pins = [2, 3, 4, 17, 27, 22, 10, 9, 11, 5] #pin numbers
 f = 500 #frequency in Hz
 dc_f = .2 # duty cycle B
+phi = math.pi/11 #phi for phase shift
 
 #initialize all pins
 for i in range(10):
@@ -18,10 +19,21 @@ for p in pins:
 	pwm.append(pwmCall)
 	pwmCall.start(0)
 
+#input pin
+input = 26
+GPIO.setup(input, gpio.IN, pull_up_down=gpio.PUD_DOWN)
+
+# Define a threaded callback function:
+def myCallback(pin):
+	phi = -1 * math.pi/11 #switch direction
+
+# Execute myCallback() if 26 goes HIGH:
+gpio.add_event_detect(input, gpio.RISING, callback=myCallback, bouncetime=100)
+
 try:
 	while True:
+		#index through pwn array with enumerate to use index for phase shift
 		for (index, pwmLED) in enumerate(pwm):
-			phi = math.pi/11
 			phaseShift = index * phi
 			t = time.time()
 			B = (math.sin(2*math.pi*dc_f*t - phaseShift))**2
@@ -34,6 +46,7 @@ except KeyboardInterrupt:
 pwm.stop()
 GPIO.cleanup()
 	
+
 
 
 
