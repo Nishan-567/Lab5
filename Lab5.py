@@ -26,7 +26,7 @@ try:
 			t = time.time()
 			B = (math.sin(2*math.pi*dc_f*t - phi))**2
 			dc = B * 100
-			pwm.ChangeDutyCycle(dc)
+			pwmLED.ChangeDutyCycle(dc)
 
 except KeyboardInterrupt:
 	print('\nExiting')
@@ -34,6 +34,7 @@ except KeyboardInterrupt:
 pwm.stop()
 GPIO.cleanup()
 	
+
 
 
 
