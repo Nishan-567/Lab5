@@ -15,8 +15,10 @@ for i in range(2):
 dc_f = .2 # duty cycle B
 
 pwm = GPIO.PWM(pins[0], f)
+pwm2 = GPIO.PWM(pins[1], f)
 
 pwm.start(0)
+pwm2.start(0)
 
 try:
 	while True:
@@ -28,8 +30,7 @@ try:
 		#2
 		phi = math.pi/11
 		dc2 = (math.sin(2*math.pi*dc_f*t - phi))**2
-		pwm = GPIO.PWM(pins[1], f)
-		pwm.start(dc2)
+		pwm2.start(dc2)
 
 except KeyboardInterrupt:
 	print('\nExiting')
@@ -37,6 +38,7 @@ except KeyboardInterrupt:
 pwm.stop()
 GPIO.cleanup()
 	
+
 
 
 
