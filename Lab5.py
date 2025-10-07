@@ -20,7 +20,7 @@ for p in pins:
 
 try:
 	while True:
-		for (index, pwmLED) in pwm:
+		for (index, pwmLED) in enumerate(pwm):
 			phi = math.pi/11
 			phaseShift = I * phi
 			t = time.time()
@@ -34,6 +34,7 @@ except KeyboardInterrupt:
 pwm.stop()
 GPIO.cleanup()
 	
+
 
 
 
