@@ -7,7 +7,7 @@ GPIO.setmode(GPIO.BCM)
 pins = [2, 3, 4, 17, 27, 22, 10, 9, 11, 5] #pin numbers
 f = 500 #frequency in Hz
 dc_f = .2 # duty cycle B
-phi = math.pi/11 #phi for phase shift
+phi = -1 * math.pi/11 #phi for phase shift
 
 #initialize all pins
 for i in range(10):
@@ -46,6 +46,7 @@ except KeyboardInterrupt:
 pwm.stop()
 GPIO.cleanup()
 	
+
 
 
 
