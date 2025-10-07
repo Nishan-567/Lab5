@@ -21,14 +21,14 @@ for p in pins:
 
 #input pin
 input = 26
-GPIO.setup(input, gpio.IN, pull_up_down=gpio.PUD_DOWN)
+GPIO.setup(input, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 # Define a threaded callback function:
 def myCallback(pin):
 	phi = -1 * math.pi/11 #switch direction
 
 # Execute myCallback() if 26 goes HIGH:
-gpio.add_event_detect(input, gpio.RISING, callback=myCallback, bouncetime=100)
+GPIO.add_event_detect(input, GPIO.RISING, callback=myCallback, bouncetime=100)
 
 try:
 	while True:
@@ -46,6 +46,7 @@ except KeyboardInterrupt:
 pwm.stop()
 GPIO.cleanup()
 	
+
 
 
 
