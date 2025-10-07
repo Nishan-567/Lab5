@@ -14,22 +14,36 @@ for i in range(2):
 
 
 dc_f = .2 # duty cycle B
-t = time.time()
-dc1 = (math.sin(2*math.pi*dc_f*t))**2 #pwm duty cycle
 
 
 pwm = GPIO.PWM(pins[0], f)
 
-pwm.start(dc1)
+pwm.start(0)
+
+try:
+	while True:
+		t = time.time()
+		B1 = (math.sin(2*math.pi*dc_f*t))**2 #pwm duty cycle
+		dc1 = B1*100
+		pwm.ChangeDutyCycle(dc1)
+
+except KeyboardInterrupt:
+	print('\nExiting')
+
+pwm.stop()
+GPIO.cleanup()
+	
+
 
 #2
-phi = math.pi/11
+'''phi = math.pi/11
 dc2 = (math.sin(2*math.pi*dc_f*t - phi))**2
 
 pwm = GPIO.PWM(pins[1], f)
 
 
-pwm.start(dc2)
+pwm.start(dc2)'''
+
 
 
 
