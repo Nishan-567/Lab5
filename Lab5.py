@@ -4,34 +4,29 @@ import math
 
 GPIO.setmode(GPIO.BCM)
 
-#1
-
-pins = [2, 3] #pin numbers
+pins = [2, 3, 4, 17, 27, 22, 10, 9, 11, 5] #pin numbers
 f = 500 #frequency in Hz
-#initialize all pins
-for i in range(2):
-	GPIO.setup(pins[i], GPIO.OUT)
-
 dc_f = .2 # duty cycle B
 
-pwm = GPIO.PWM(pins[0], f)
-pwm2 = GPIO.PWM(pins[1], f)
-
-pwm.start(0)
-pwm2.start(0)
+#initialize all pins
+for i in range(10):
+	GPIO.setup(pins[i], GPIO.OUT)
+#set up pwm for all led
+pwm = []
+for p in pins:
+	pwmCall = GPIO.PWM(p, f)
+	pwm.append(pwmCall)
+	pwmCall.start(0)
 
 try:
 	while True:
-		t = time.time()
-		B1 = (math.sin(2*math.pi*dc_f*t))**2 #pwm duty cycle
-		dc1 = B1*100
-		pwm.ChangeDutyCycle(dc1)
-		
-		#2
-		phi = math.pi/11
-		B2 = (math.sin(2*math.pi*dc_f*t - phi))**2
-		dc2 = B2 * 100
-		pwm2.ChangeDutyCycle(dc2)
+		for (index, pwmLED) in pwm:
+			phi = math.pi/11
+			phaseShift = I * phi
+			t = time.time()
+			B = (math.sin(2*math.pi*dc_f*t - phi))**2
+			dc = B * 100
+			pwm.ChangeDutyCycle(dc)
 
 except KeyboardInterrupt:
 	print('\nExiting')
@@ -39,6 +34,7 @@ except KeyboardInterrupt:
 pwm.stop()
 GPIO.cleanup()
 	
+
 
 
 
