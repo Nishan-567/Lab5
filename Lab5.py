@@ -29,8 +29,9 @@ try:
 		
 		#2
 		phi = math.pi/11
-		dc2 = (math.sin(2*math.pi*dc_f*t - phi))**2
-		pwm2.start(dc2)
+		B2 = (math.sin(2*math.pi*dc_f*t - phi))**2
+		dc2 = B2 * 100
+		pwm2.ChangeDutyCycle(dc2)
 
 except KeyboardInterrupt:
 	print('\nExiting')
@@ -38,6 +39,7 @@ except KeyboardInterrupt:
 pwm.stop()
 GPIO.cleanup()
 	
+
 
 
 
