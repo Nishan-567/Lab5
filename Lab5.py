@@ -1,4 +1,4 @@
-import RPi.GPIO as gpio
+import RPi.GPIO as GPIO
 import time
 import math
 
@@ -27,5 +27,6 @@ phi = math.pi/11
 dc2 = (math.sin(2*math.pi*dc_f*t - phi))**2
 
 pwm = GPIO.PWM(pin[1], f)
+
 
 pwm.start(dc2)
