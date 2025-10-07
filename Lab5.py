@@ -24,12 +24,12 @@ input = 26
 GPIO.setup(input, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 # Define a threaded callback function:
-def myCallback(pin):
+def myCallback():
 	phi = -1 * math.pi/11 #switch direction
 
 try:
 	# Execute myCallback() if 26 goes HIGH:
-	GPIO.add_event_detect(input, GPIO.RISING, callback=myCallback, bouncetime=100)
+	GPIO.add_event_detect(input, GPIO.RISING, callback=myCallback(), bouncetime=100)
 	
 	while True:
 		#index through pwn array with enumerate to use index for phase shift
@@ -46,6 +46,7 @@ except KeyboardInterrupt:
 pwm.stop()
 GPIO.cleanup()
 	
+
 
 
 
