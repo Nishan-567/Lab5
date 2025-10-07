@@ -9,7 +9,7 @@ GPIO.setmode(GPIO.BCM)
 pins = [2, 3] #pin numbers
 f = 500 #frequency in Hz
 #initialize all pins
-for i in range(3):
+for i in range(2):
 	GPIO.setup(pins[i], GPIO.OUT)
 
 
@@ -30,5 +30,6 @@ pwm = GPIO.PWM(pins[1], f)
 
 
 pwm.start(dc2)
+
 
 
